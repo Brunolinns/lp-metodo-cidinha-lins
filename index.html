@@ -458,14 +458,14 @@ footer a:hover{color:var(--dourado-claro)}
 <header class="hero">
   <div class="wrap">
     <span class="eyebrow">Método Cidinha Lins · Segredos do Loiro Perfeito</span>
-    <h1>Aprenda a Fazer <em>Loiros de Alto Valor</em> com Segurança e Transforme Cada Atendimento em Uma Nova Oportunidade de Faturamento</h1>
-    <p class="sub">Descubra o método desenvolvido por Cidinha Lins após mais de 30 anos de experiência formando profissionais em todo o Brasil — e aprenda a criar loiros valorizados, seguros e altamente lucrativos.</p>
+    <h1 id="hero-h1">A técnica que você viu no vídeo é só uma das que você vai dominar: o método completo para <em>Loiros de Alto Valor</em> — transição invisível, sem manchas, sem medo da descoloração</h1>
+    <p class="sub" id="hero-sub">Com a técnica dominada, você para de competir por preço: atende menos clientes, entrega o cabelo que a concorrência não faz e cobra pelo resultado — com Cidinha Lins, que forma profissionais há mais de 30 anos.</p>
 
     <div class="video-box">
       <iframe src="https://www.youtube-nocookie.com/embed/jWPMvrpzWmE?rel=0&modestbranding=1" title="Método Cidinha Lins" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
     </div>
 
-    <a class="cta abre-precheckout" href="#pre-checkout">Quero me tornar especialista em loiros</a>
+    <a class="cta abre-precheckout" href="#pre-checkout" id="hero-cta">Quero aprender o método</a>
     <p class="cta-nota">Acesso imediato · Garantia de 7 dias · Certificado incluso</p>
     <div class="hero-stats">
       <span>7 módulos</span><span>35+ aulas</span><span>Demonstrações em modelos reais</span><span>12 meses de acesso</span>
@@ -999,5 +999,23 @@ var URL_CHECKOUT = "https://pay.hotmart.com/A83319083M?off=h79jz0o9";
 })();
 </script>
 
+<script>
+/* Headline dinâmica por UTM — padrão: ângulo de técnica (85% do tráfego).
+   utm_content contendo "autoridade", "valor" ou "negocio" inverte a dobra
+   para o ângulo de posicionamento/preço (vídeos "Maria" e "Valorize"). */
+(function(){
+  try{
+    var v = (new URLSearchParams(window.location.search).get('utm_content') || '').toLowerCase();
+    if (v.indexOf('autoridade') > -1 || v.indexOf('valor') > -1 || v.indexOf('negocio') > -1) {
+      var h1 = document.getElementById('hero-h1');
+      var sub = document.getElementById('hero-sub');
+      var cta = document.getElementById('hero-cta');
+      if (h1) h1.innerHTML = 'Você tem <em>preço</em> ou tem <em>valor</em>? O método da Cidinha Lins para se tornar referência em loiros na sua região e cobrar pelo resultado que entrega';
+      if (sub) sub.textContent = 'Técnica, posicionamento e autoridade em um método completo — do diagnóstico à finalização, com quem forma profissionais há mais de 30 anos e é referência nacional em loiros.';
+      if (cta) cta.textContent = 'Quero me tornar referência';
+    }
+  }catch(e){}
+})();
+</script>
 </body>
 </html>
