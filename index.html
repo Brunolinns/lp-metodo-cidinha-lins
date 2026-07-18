@@ -473,6 +473,56 @@ footer a:hover{color:var(--dourado-claro)}
   </div>
 </header>
 
+<!-- ================= ANTES E DEPOIS ================= -->
+<style>
+.ad-faixa{background:var(--preto-suave);padding:72px 0}
+.ad-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:44px}
+@media(max-width:820px){.ad-grid{grid-template-columns:1fr;gap:36px}}
+.ad-par .fotos{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ad-par figure{position:relative;border-radius:10px;overflow:hidden;border:1px solid var(--linha)}
+.ad-par img{width:100%;height:100%;object-fit:cover;aspect-ratio:3/4}
+.ad-par figcaption{
+  position:absolute;top:10px;left:10px;background:rgba(12,10,8,.78);
+  color:var(--dourado-claro);font-size:11px;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;padding:5px 12px;border-radius:999px;border:1px solid var(--linha)
+}
+.ad-par .legenda{margin-top:14px;text-align:center;color:var(--champagne);font-size:14.5px}
+.ad-par .legenda .mod{display:block;margin-top:4px;color:var(--dourado);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase}
+.ad-faixa .titulo{color:var(--champagne)}
+</style>
+<section class="ad-faixa">
+  <div class="wrap">
+    <div class="titulo-center reveal">
+      <span class="eyebrow">Resultados do método</span>
+      <h2 class="titulo">Feitos pela Cidinha — com o passo a passo que você vai aprender</h2>
+      <div class="linha-ouro"></div>
+    </div>
+    <div class="ad-grid">
+      <div class="ad-par reveal">
+        <div class="fotos">
+          <figure><img src="01-antes-correcao-laranja.webp" alt="Cabelo alaranjado antes da correção de cor" loading="lazy"><figcaption>Antes</figcaption></figure>
+          <figure><img src="01-depois-loiro-platinado.webp" alt="Loiro platinado após correção de cor pelo método" loading="lazy"><figcaption>Depois</figcaption></figure>
+        </div>
+        <p class="legenda">Do alaranjado ao platinado, sem quebra<span class="mod">Correção de cor · Módulo 7</span></p>
+      </div>
+      <div class="ad-par reveal">
+        <div class="fotos">
+          <figure><img src="02-antes-mechas-acinzentadas.webp" alt="Mechas crescidas e acinzentadas antes do método" loading="lazy"><figcaption>Antes</figcaption></figure>
+          <figure><img src="02-depois-loiro-perola.webp" alt="Loiro pérola uniforme após o método" loading="lazy"><figcaption>Depois</figcaption></figure>
+        </div>
+        <p class="legenda">De mechas marcadas ao loiro pérola<span class="mod">Descoloração e divisão · Módulos 4 e 5</span></p>
+      </div>
+      <div class="ad-par reveal">
+        <div class="fotos">
+          <figure><img src="03-antes-fundo-escuro.webp" alt="Cabelo de fundo escuro esmaecido antes do método" loading="lazy"><figcaption>Antes</figcaption></figure>
+          <figure><img src="03-depois-loiro-iluminado.webp" alt="Loiro iluminado com transição invisível após o método" loading="lazy"><figcaption>Depois</figcaption></figure>
+        </div>
+        <p class="legenda">Do fundo escuro ao loiro iluminado<span class="mod">Técnicas · Módulo 6</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= BENEFÍCIOS ================= -->
 <section class="beneficios">
   <div class="wrap">
@@ -885,12 +935,8 @@ footer a:hover{color:var(--dourado-claro)}
       <label for="pc-whats">Seu WhatsApp</label>
       <input type="tel" id="pc-whats" name="whatsapp" autocomplete="tel" placeholder="(11) 99999-9999" required>
     </div>
-    <div class="pc-campo">
-      <label for="pc-email">Seu melhor e-mail</label>
-      <input type="email" id="pc-email" name="email" autocomplete="email" required>
-    </div>
     <a class="cta" id="pc-enviar" href="#">Continuar para o pagamento seguro</a>
-    <p class="pc-erro" id="pc-erro">Preencha os três campos para continuar.</p>
+    <p class="pc-erro" id="pc-erro">Preencha os dois campos para continuar.</p>
     <p class="pc-priv">🔒 Seus dados estão seguros e não serão compartilhados.</p>
   </div>
 </div>
@@ -926,9 +972,8 @@ var URL_CHECKOUT = "https://pay.hotmart.com/A83319083M?off=h79jz0o9";
     e.preventDefault();
     var nome = document.getElementById('pc-nome').value.trim();
     var whats = document.getElementById('pc-whats').value.trim();
-    var email = document.getElementById('pc-email').value.trim();
 
-    if(!nome || whats.replace(/\D/g,'').length < 10 || !/.+@.+\..+/.test(email)){
+    if(!nome || whats.replace(/\D/g,'').length < 10){
       erro.style.display = 'block';
       return;
     }
@@ -946,7 +991,7 @@ var URL_CHECKOUT = "https://pay.hotmart.com/A83319083M?off=h79jz0o9";
         var dados = new FormData();
         dados.append('nome', nome);
         dados.append('whatsapp', whats);
-        dados.append('email', email);
+        dados.append('email', '');
         dados.append('origem', 'LP Método Cidinha Lins');
         dados.append('data', new Date().toLocaleString('pt-BR'));
         navigator.sendBeacon ? navigator.sendBeacon(URL_PLANILHA, dados)
@@ -957,7 +1002,6 @@ var URL_CHECKOUT = "https://pay.hotmart.com/A83319083M?off=h79jz0o9";
     // redireciona pro checkout com dados pré-preenchidos
     var destino = URL_CHECKOUT
       + '&name=' + encodeURIComponent(nome)
-      + '&email=' + encodeURIComponent(email)
       + '&phonenumber=' + encodeURIComponent(whats.replace(/\D/g,''));
     window.location.href = destino;
   });
